@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE COLLECTION | SEIN MOTORS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+    <div class="bg-grid"></div>
+
+    <nav class="navbar active">
+        <div class="nav-inner">
+            <a href="index.html"><img src="propoerties/sein logo.png" class="nav-logo" alt="SEIN MOTORS"></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">HOME</a></li>
+                <li><a href="collection.html" class="nav-item active-link">THE COLLECTION</a></li>
+                <li><a href="#" class="nav-item">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="stock-header">
+        <div class="reveal-mask"><h1>FULL STOCK LIST</h1></div>
+        <div class="title-line-short"></div>
+    </header>
+
+    <main class="stock-grid" id="mainInventory">
+        </main>
+
+    <script>
+        window.addEventListener('load', () => {
+            fetch('inventory.json')
+                .then(response => response.json())
+                .then(data => {
+                    const grid = document.getElementById('mainInventory');
+                    grid.innerHTML = ''; 
+                    
+                    data.forEach(car => {
+                        const card = document.createElement('div');
+                        card.className = "stock-card reveal-up active";
+                        card.innerHTML = `
+                            <div class="stock-img-wrap magnetic-card">
+                                <img src="${car.image}" class="parallax-img">
+                            </div>
+                            <p class="stock-name">${car.year} ${car.name}</p>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    document.body.classList.remove('loading');
+                })
+                .catch(err => {
+                    console.error("Error loading cars:", err);
+                    document.body.classList.remove('loading');
+                });
+        });
+    </script>
+</body>
+</html>
