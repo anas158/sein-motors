@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE COLLECTION | SEIN MOTORS</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styling for the new description sections */
+        .stock-info {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stock-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .stock-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Inter', sans-serif;
+        }
+        .stock-card {
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        .stock-card:hover {
+            transform: translateY(-10px);
+            border-color: #fff;
+        }
+    </style>
 </head>
 <body class="loading">
     <div class="bg-grid"></div>
@@ -30,7 +62,8 @@
 
     <script>
         window.addEventListener('load', () => {
-            fetch('inventory.json')
+            // Adding a small cache-buster (?v=) so the site updates instantly when you edit the JSON
+            fetch('inventory.json?v=' + Date.now())
                 .then(response => response.json())
                 .then(data => {
                     const grid = document.getElementById('mainInventory');
@@ -41,16 +74,21 @@
                         card.className = "stock-card reveal-up active";
                         card.innerHTML = `
                             <div class="stock-img-wrap magnetic-card">
-                                <img src="${car.image}" class="parallax-img">
+                                <img src="${car.image}" class="parallax-img" alt="${car.name}">
                             </div>
-                            <p class="stock-name">${car.year} ${car.name}</p>
+                            <div class="stock-info">
+                                <p class="stock-name">${car.year} ${car.name}</p>
+                                <p class="stock-desc">
+                                    ${car.description || "No description provided for this vehicle."}
+                                </p>
+                            </div>
                         `;
                         grid.appendChild(card);
                     });
                     document.body.classList.remove('loading');
                 })
                 .catch(err => {
-                    console.error("Error loading cars:", err);
+                    console.error("Error loading inventory:", err);
                     document.body.classList.remove('loading');
                 });
         });
