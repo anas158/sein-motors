@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEIN MOTORS | Exclusive Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+    <div class="bg-grid"></div>
+
+    <div id="loader">
+        <div class="loader-wrap">
+            <h1 class="loader-logo">SEIN</h1>
+            <div class="loader-line-bg"><div class="loader-line-fill"></div></div>
+            <div class="loader-stats"><span>SYSTEM_ONLINE</span><span class="pct">00</span></div>
+        </div>
+    </div>
+
+    <nav class="navbar reveal-down">
+        <div class="nav-inner">
+            <img src="propoerties/sein logo.png" class="nav-logo" alt="SEIN MOTORS">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">HOME</a></li>
+                <li><a href="#" class="nav-item">ABOUT SEIN</a></li>
+                <li><a href="collection.html" class="nav-item">THE COLLECTION</a></li>
+                <li><a href="#" class="nav-item">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-line-v reveal-down"></div>
+        <div class="hero-bg" style="background-image: url('propoerties/bugatti.png');"></div>
+        <div class="hero-content">
+            <div class="reveal-mask"><h1>CURATING THE IMPOSSIBLE</h1></div>
+            <div class="reveal-mask"><p>SEIN MOTORS IS THE SANCTUARY FOR THE WORLD'S MOST ELUSIVE AUTOMOTIVE MASTERPIECES.</p></div>
+            <button class="btn-pill flow-btn"><span class="btn-text">EXPLORE THE COLLECTION</span></button>
+        </div>
+    </header>
+
+    <section class="philosophy">
+        <div class="marquee-wrap">
+            <div class="marquee">
+                <span>PRECISION // PERFORMANCE // EXCLUSIVITY // ENGINEERING // PRECISION // PERFORMANCE // EXCLUSIVITY // ENGINEERING // </span>
+                <span>PRECISION // PERFORMANCE // EXCLUSIVITY // ENGINEERING // PRECISION // PERFORMANCE // EXCLUSIVITY // ENGINEERING // </span>
+            </div>
+        </div>
+
+        <div class="phil-header reveal-up">
+            <h2 class="serif-title">Power & <br> Passion</h2>
+            <div class="title-line"></div>
+            <p class="phil-sub">SEIN MOTORS is a new standing Dealer. Specialist in National Sale of Rare Hypercars and Exclusive SuperCars.</p>
+        </div>
+        
+        <div class="zoom-box">
+            <div class="zoom-inner">
+                <img src="propoerties/ferrari812.png" id="ferrari-zoom" alt="Ferrari 812 GTS">
+            </div>
+        </div>
+    </section>
+
+    <section class="cat-grid">
+        <div class="cat-card reveal-up">
+            <div class="cat-img" style="background-image: url('propoerties/bugatti2.png.png');"></div>
+            <div class="cat-overlay">
+                <h3 class="cat-title">OUR COLLECTION</h3>
+                <button class="btn-pill flow-btn card-btn"><span class="btn-text">VIEW INVENTORY</span></button>
+            </div>
+        </div>
+
+        <div class="cat-card reveal-up" style="transition-delay: 0.1s;">
+            <div class="cat-overlay socials-alt">
+                <div class="text-top">
+                    <h3 class="cat-title">SOCIALS</h3>
+                    <button class="btn-pill flow-btn card-btn"><span class="btn-text">JOIN THE WORLD</span></button>
+                </div>
+                <div class="cat-img-sub" style="background-image: url('propoerties/porsche.png');"></div>
+            </div>
+        </div>
+
+        <div class="cat-card reveal-up" style="transition-delay: 0.2s;">
+            <div class="cat-img" style="background-image: url('propoerties/merc.png');"></div>
+            <div class="cat-overlay">
+                <h3 class="cat-title">PHILOSOPHY</h3>
+                <button class="btn-pill flow-btn card-btn"><span class="btn-text">OUR VISION</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="socials-fan">
+        <div class="scroll-line-container">
+            <div class="scroll-line-draw"></div>
+        </div>
+
+        <div class="reveal-mask"><h2 class="serif-title white">FOLLOW THE <br> WORLD OF SEIN <br> MOTORS</h2></div>
+        
+        <div class="fan-wrap">
+            <div class="fan-stack">
+                <div class="fan-card c1"><img src="propoerties/ig-4.png.png" alt="IG Post"></div>
+                <div class="fan-card c2"><img src="propoerties/ig-2.png.png" alt="IG Post"></div>
+                <div class="fan-card c3"><img src="propoerties/ig-1.png.png" alt="IG Post"></div>
+            </div>
+        </div>
+
+        <div class="fan-ui reveal-up">
+            <button class="btn-pill grey flow-btn"><span class="btn-text">INSTAGRAM</span></button>
+            <div class="follower-box">
+                <span class="count">1.2K</span>
+                <span class="label">FOLLOWERS</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content reveal-up">
+            <img src="propoerties/sein logo.png" class="footer-logo" alt="SEIN MOTORS">
+            <div class="footer-info">
+                <h4 class="info-label">LOCATION</h4>
+                <p class="info-detail">Olaya Street, Al Muruj, Riyadh</p>
+            </div>
+            <div class="footer-quote">
+                <p>"SEIN MOTORS, WHERE AUTOMOTIVE MEETS EXCELLENCE"</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="#">CONTACT</a><span class="dot">•</span>
+                <a href="#">WORKING HOURS</a><span class="dot">•</span>
+                <a href="#">ABOUT US</a>
+            </nav>
+            <div class="newsletter-wrap">
+                <button class="btn-pill white-bg flow-btn">
+                    <span class="btn-text">Subscribe to our Newsletter</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. PRELOADER LOGIC
+        window.addEventListener('load', () => {
+            const pct = document.querySelector('.pct');
+            let val = 0;
+            const int = setInterval(() => {
+                val += Math.floor(Math.random() * 25);
+                if (val >= 100) { val = 100; clearInterval(int);
+                    setTimeout(() => { 
+                        document.getElementById('loader').style.transform = "translateY(-100%)"; 
+                        document.body.classList.remove('loading'); 
+                        document.querySelector('.navbar').classList.add('active');
+                    }, 400);
+                }
+                pct.innerText = val.toString().padStart(2, '0');
+            }, 60);
+        });
+
+        // 2. MAGNETIC BUTTON PHYSICS
+        document.querySelectorAll('.flow-btn, .nav-item').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+                btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+                if(btn.querySelector('.btn-text')) btn.querySelector('.btn-text').style.transform = `translate(${x*0.5}px, ${y*0.5}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0,0) scale(1)`;
+                if(btn.querySelector('.btn-text')) btn.querySelector('.btn-text').style.transform = `translate(0,0)`;
+            });
+        });
+
+        // 3. MOTION ENGINE (Scroll-linked Animations)
+        const ferrari = document.getElementById('ferrari-zoom');
+        const scrollLine = document.querySelector('.scroll-line-draw');
+        const marquee = document.querySelector('.marquee');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Grid Background Movement
+            document.querySelector('.bg-grid').style.backgroundPositionY = scrolled * 0.15 + 'px';
+
+            // Philosophy Zoom & Marquee
+            const philRect = document.querySelector('.philosophy').getBoundingClientRect();
+            if(philRect.top < window.innerHeight && philRect.bottom > 0) {
+                const p = (window.innerHeight - philRect.top) / (window.innerHeight + philRect.height);
+                ferrari.style.transform = `scale(${1 + (p * 0.45)})`;
+                marquee.style.transform = `translateX(${-p * 15}%)`;
+            }
+
+            // Socials Fan & Animated Line
+            const igRect = document.querySelector('.socials-fan').getBoundingClientRect();
+            if(igRect.top < window.innerHeight && igRect.bottom > 0) {
+                const p = (window.innerHeight - igRect.top) / (window.innerHeight + igRect.height);
+                document.querySelector('.c1').style.transform = `translateX(${-380 * p}px) rotate(${-18 * p}deg)`;
+                document.querySelector('.c3').style.transform = `translateX(${380 * p}px) rotate(${18 * p}deg)`;
+                document.querySelector('.c2').style.transform = `translateY(${-40 * p}px) scale(${1 + (0.1 * p)})`;
+                scrollLine.style.height = (p * 100) + '%';
+            }
+        });
+
+        // 4. INTERSECTION OBSERVER (Reveals)
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-up, .reveal-mask, .reveal-down, .cat-card').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>
