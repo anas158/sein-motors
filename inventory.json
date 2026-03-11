@@ -1,14 +1,16 @@
 [
   {
     "id": 1,
-    "year": "2025",
-    "name": "Koenigsegg Jesko",
-    "image": "propoerties/jesko.png"
+    "year": "2024",
+    "name": "Ferrari F12berlinetta",
+    "image": "propoerties/f12.jpg",
+    "description": "A masterpiece of Italian engineering. This F12 comes in Rosso Corsa with a Nero leather interior. Powered by a 6.3L V12 producing 730 HP. Full service history included."
   },
   {
     "id": 2,
-    "year": "2015",
-    "name": "McLaren P1 GTR",
-    "image": "propoerties/p1.png"
+    "year": "2023",
+    "name": "Chevrolet Corvette Z06",
+    "image": "propoerties/z06.jpg",
+    "description": "The American supercar. Features the flat-plane crank LT6 V8 engine. Finished in Amplify Orange with the Z07 Performance Package and carbon fiber wheels."
   }
 ]
