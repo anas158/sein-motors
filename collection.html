@@ -8,45 +8,43 @@
     <style>
         .stock-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 40px; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 30px; 
             padding: 150px 5% 80px; 
+            min-height: 500px;
         }
 
         .stock-card { 
             background: #0a0a0a; 
             border: 1px solid rgba(255,255,255,0.05); 
-            transition: 0.4s; 
-            display: block;
             text-decoration: none;
             color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
         }
 
         .stock-card:hover { border-color: #fff; transform: translateY(-5px); }
 
-        /* Forces the image container to be visible even if empty */
         .stock-img-wrap { 
             width: 100%; 
             aspect-ratio: 16/9; 
-            background: #111; 
-            overflow: hidden; 
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #1a1a1a; /* Dark gray so we can see the box if img fails */
+            overflow: hidden;
         }
 
         .stock-img-wrap img { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            display: block;
-            opacity: 1 !important; /* Forces visibility */
+            display: block !important;
         }
 
-        .stock-info { padding: 25px; }
-        .stock-name { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: #fff; }
-        .stock-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+        .stock-info { padding: 20px; flex-grow: 1; }
+        .stock-name { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; color: #fff; }
+        .stock-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+        
+        #error-msg { color: red; text-align: center; padding: 20px; display: none; }
     </style>
 </head>
 <body>
@@ -57,35 +55,61 @@
         </div>
     </nav>
 
-    <main class="stock-grid" id="mainInventory"></main>
+    <div id="error-msg"></div>
+    <main class="stock-grid" id="mainInventory">
+        <p style="color:white; opacity:0.3;">Loading inventory...</p>
+    </main>
 
     <script>
-        // Adding a timestamp to the fetch to ensure we aren't seeing an old version
-        fetch('inventory.json?v=' + Date.now())
-            .then(res => res.json())
-            .then(data => {
-                const grid = document.getElementById('mainInventory');
-                grid.innerHTML = ''; // Clear the "void" before loading
+        async function loadInventory() {
+            const grid = document.getElementById('mainInventory');
+            const errorBox = document.getElementById('error-msg');
+
+            try {
+                // Fetching with a timestamp to bypass GitHub's 5-minute cache
+                const response = await fetch('inventory.json?v=' + new Date().getTime());
+                
+                if (!response.ok) {
+                    throw new Error("Could not find inventory.json file on the server.");
+                }
+
+                const data = await response.json();
+
+                if (!data || data.length === 0) {
+                    grid.innerHTML = "<p style='color:white;'>The inventory is currently empty.</p>";
+                    return;
+                }
+
+                grid.innerHTML = ''; // Clear the loading text
 
                 data.forEach(car => {
-                    const card = document.createElement('a'); // Making the card itself the link
+                    const card = document.createElement('a');
                     card.href = `details.html?id=${car.id}`;
                     card.className = "stock-card";
                     
                     card.innerHTML = `
                         <div class="stock-img-wrap">
-                            <img src="${car.image}" alt="${car.name}" onload="this.style.opacity='1'">
+                            <img src="${car.image}" alt="${car.name}">
                         </div>
                         <div class="stock-info">
                             <p class="stock-name">${car.year} ${car.name}</p>
-                            <p class="stock-desc">${car.description.substring(0, 80)}...</p>
-                            <p style="margin-top:15px; font-size:10px; opacity:0.5; letter-spacing: 2px;">VIEW SPECIFICATION →</p>
+                            <p class="stock-desc">${car.description ? car.description.substring(0, 70) + '...' : ''}</p>
+                            <p style="margin-top:10px; font-size:10px; color:#fff; opacity:0.4;">VIEW DETAILS →</p>
                         </div>
                     `;
                     grid.appendChild(card);
                 });
-            })
-            .catch(err => console.error("Error loading car images:", err));
+
+            } catch (err) {
+                console.error(err);
+                errorBox.style.display = 'block';
+                errorBox.innerText = "Error: " + err.message;
+                grid.innerHTML = ""; 
+            }
+        }
+
+        // Run the function
+        loadInventory();
     </script>
 </body>
 </html>
