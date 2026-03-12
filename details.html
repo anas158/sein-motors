@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .details-container { padding: 150px 5% 50px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; max-width: 1400px; margin: 0 auto; }
-        .main-img { width: 100%; border: 1px solid rgba(255,255,255,0.1); }
+        .main-img-wrap { width: 100%; border: 1px solid rgba(255,255,255,0.1); }
+        .main-img-wrap img { width: 100%; display: block; }
         .detail-title { font-size: 3.5rem; line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
-        .detail-para { line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+        .detail-para { line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 40px; font-size: 1.1rem; }
         .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .spec-item small { display: block; opacity: 0.3; text-transform: uppercase; font-size: 0.7rem; }
-        .contact-btn { width: 100%; margin-top: 40px; padding: 20px; background: #fff; color: #000; border: none; font-weight: 700; cursor: pointer; }
+        .spec-item small { display: block; opacity: 0.3; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+        .contact-btn { width: 100%; margin-top: 40px; padding: 20px; background: #fff; color: #000; border: none; font-weight: 700; cursor: pointer; letter-spacing: 2px; }
         @media (max-width: 900px) { .details-container { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -29,18 +30,20 @@
             if(car) {
                 document.getElementById('content').innerHTML = `
                     <div>
-                        <a href="collection.html" style="color:#fff; text-decoration:none; opacity:0.5; font-size:12px;">← BACK</a>
-                        <img src="${car.image}" class="main-img" style="margin-top:20px;">
+                        <a href="collection.html" style="color:#fff; text-decoration:none; opacity:0.5; font-size:12px; letter-spacing:1px;">← BACK TO COLLECTION</a>
+                        <div class="main-img-wrap" style="margin-top:20px;"><img src="${car.image}"></div>
                     </div>
                     <div>
                         <h1 class="detail-title">${car.year}<br>${car.name}</h1>
-                        <p style="font-size:1.5rem; margin-bottom:20px;">${car.price || 'P.O.A'}</p>
+                        <p style="font-size:1.5rem; margin-bottom:20px; font-weight:300;">${car.price || 'P.O.A'}</p>
                         <p class="detail-para">${car.description}</p>
                         <div class="spec-grid">
-                            <div class="spec-item"><small>Mileage</small>${car.mileage}</div>
                             <div class="spec-item"><small>Engine</small>${car.engine}</div>
+                            <div class="spec-item"><small>Transmission</small>${car.transmission}</div>
+                            <div class="spec-item"><small>Mileage</small>${car.mileage}</div>
+                            <div class="spec-item"><small>Exterior</small>${car.color}</div>
                         </div>
-                        <button class="contact-btn">ENQUIRE NOW</button>
+                        <button class="contact-btn">ENQUIRE VIA WHATSAPP</button>
                     </div>`;
             }
         });

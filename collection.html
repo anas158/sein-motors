@@ -7,13 +7,26 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; padding: 150px 5% 50px; }
-        .stock-card { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; cursor: pointer; }
+        .stock-card { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; overflow: hidden; }
         .stock-card:hover { border-color: #fff; transform: translateY(-5px); }
-        .stock-img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
-        .stock-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .stock-card:hover img { transform: scale(1.05); }
+        
+        /* Fixed the "Void" issue here */
+        .stock-img-wrap { 
+            width: 100%; 
+            aspect-ratio: 16/9; 
+            background: #111; 
+            overflow: hidden; 
+            display: block;
+        }
+        .stock-img-wrap img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block; 
+        }
+
         .stock-info { padding: 25px; }
-        .stock-name { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .stock-name { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: #fff; }
         .stock-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
@@ -40,12 +53,12 @@
                     const card = document.createElement('div');
                     card.className = "stock-card";
                     card.innerHTML = `
-                        <a href="details.html?id=${car.id}" style="text-decoration: none; color: inherit;">
-                            <div class="stock-img-wrap"><img src="${car.image}"></div>
+                        <a href="details.html?id=${car.id}" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="stock-img-wrap"><img src="${car.image}" alt="${car.name}"></div>
                             <div class="stock-info">
                                 <p class="stock-name">${car.year} ${car.name}</p>
                                 <p class="stock-desc">${car.description}</p>
-                                <p style="margin-top:15px; font-size:10px; opacity:0.5;">VIEW DETAILS →</p>
+                                <p style="margin-top:15px; font-size:10px; opacity:0.5; letter-spacing: 1px;">VIEW DETAILS →</p>
                             </div>
                         </a>`;
                     grid.appendChild(card);
