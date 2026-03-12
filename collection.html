@@ -6,28 +6,47 @@
     <title>THE COLLECTION | SEIN MOTORS</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; padding: 150px 5% 50px; }
-        .stock-card { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; overflow: hidden; }
+        .stock-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 40px; 
+            padding: 150px 5% 80px; 
+        }
+
+        .stock-card { 
+            background: #0a0a0a; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            transition: 0.4s; 
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
         .stock-card:hover { border-color: #fff; transform: translateY(-5px); }
-        
-        /* Fixed the "Void" issue here */
+
+        /* Forces the image container to be visible even if empty */
         .stock-img-wrap { 
             width: 100%; 
             aspect-ratio: 16/9; 
             background: #111; 
             overflow: hidden; 
-            display: block;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .stock-img-wrap img { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            display: block; 
+            display: block;
+            opacity: 1 !important; /* Forces visibility */
         }
 
         .stock-info { padding: 25px; }
         .stock-name { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: #fff; }
-        .stock-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .stock-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -35,35 +54,38 @@
     <nav class="navbar active">
         <div class="nav-inner">
             <a href="index.html"><img src="propoerties/sein logo.png" class="nav-logo"></a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-item">HOME</a></li>
-                <li><a href="collection.html" class="nav-item active-link">THE COLLECTION</a></li>
-            </ul>
         </div>
     </nav>
 
     <main class="stock-grid" id="mainInventory"></main>
 
     <script>
+        // Adding a timestamp to the fetch to ensure we aren't seeing an old version
         fetch('inventory.json?v=' + Date.now())
             .then(res => res.json())
             .then(data => {
                 const grid = document.getElementById('mainInventory');
+                grid.innerHTML = ''; // Clear the "void" before loading
+
                 data.forEach(car => {
-                    const card = document.createElement('div');
+                    const card = document.createElement('a'); // Making the card itself the link
+                    card.href = `details.html?id=${car.id}`;
                     card.className = "stock-card";
+                    
                     card.innerHTML = `
-                        <a href="details.html?id=${car.id}" style="text-decoration: none; color: inherit; display: block;">
-                            <div class="stock-img-wrap"><img src="${car.image}" alt="${car.name}"></div>
-                            <div class="stock-info">
-                                <p class="stock-name">${car.year} ${car.name}</p>
-                                <p class="stock-desc">${car.description}</p>
-                                <p style="margin-top:15px; font-size:10px; opacity:0.5; letter-spacing: 1px;">VIEW DETAILS →</p>
-                            </div>
-                        </a>`;
+                        <div class="stock-img-wrap">
+                            <img src="${car.image}" alt="${car.name}" onload="this.style.opacity='1'">
+                        </div>
+                        <div class="stock-info">
+                            <p class="stock-name">${car.year} ${car.name}</p>
+                            <p class="stock-desc">${car.description.substring(0, 80)}...</p>
+                            <p style="margin-top:15px; font-size:10px; opacity:0.5; letter-spacing: 2px;">VIEW SPECIFICATION →</p>
+                        </div>
+                    `;
                     grid.appendChild(card);
                 });
-            });
+            })
+            .catch(err => console.error("Error loading car images:", err));
     </script>
 </body>
 </html>
